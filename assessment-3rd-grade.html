@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3rd Grade Comprehensive Assessment - Student</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .progress-bar {
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            height: 20px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            background: white;
+            height: 100%;
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .section {
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section h2 {
+            color: #f5576c;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section h2 .icon {
+            font-size: 1.2em;
+        }
+        
+        .question {
+            background: #fef9f9;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #f5576c;
+        }
+        
+        .question p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .option {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .option:hover {
+            border-color: #f5576c;
+            transform: translateX(5px);
+            background: #fff5f5;
+        }
+        
+        .option.selected {
+            border-color: #f5576c;
+            background: #ffebee;
+        }
+        
+        .option input {
+            width: 20px;
+            height: 20px;
+            accent-color: #f5576c;
+        }
+        
+        .text-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .text-input:focus {
+            outline: none;
+            border-color: #f5576c;
+            box-shadow: 0 0 0 3px rgba(245, 87, 108, 0.2);
+        }
+        
+        .submit-section {
+            padding: 30px;
+            text-align: center;
+            background: #fef9f9;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 15px 50px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(245, 87, 108, 0.4);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.5);
+        }
+        
+        .results {
+            display: none;
+            padding: 30px;
+            background: #f0fff4;
+            border-top: 3px solid #48bb78;
+        }
+        
+        .results h3 {
+            color: #2d3748;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        
+        .score-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .score-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .score-item h4 {
+            color: #f5576c;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        .score-item .score {
+            font-size: 2em;
+            font-weight: bold;
+            color: #48bb78;
+        }
+        
+        .feedback {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            line-height: 1.8;
+        }
+        
+        .timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #f5576c;
+            z-index: 1000;
+        }
+        
+        .encouragement {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .question {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="timer" id="timer">00:00:00</div>
+    
+    <div class="container">
+        <header>
+            <h1>🌈 3rd Grade Comprehensive Assessment</h1>
+            <p>Student (Max) — Full Curriculum Review</p>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        </header>
+        
+        <form id="assessmentForm">
+            <div class="encouragement">
+                ⭐ You're doing amazing, Max! Take your time and do your best! ⭐
+            </div>
+            
+            <!-- MATHEMATICS SECTION -->
+            <div class="section" id="math-section">
+                <h2><span class="icon">🔢</span> Mathematics</h2>
+                
+                <div class="question" data-correct="b">
+                    <p><strong>1.</strong> What is 8 × 7?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q1" value="a">
+                            <span>A) 54</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="b">
+                            <span>B) 56</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="c">
+                            <span>C) 48</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="d">
+                            <span>D) 63</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="a">
+                    <p><strong>2.</strong> What is 145 + 267?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q2" value="a">
+                            <span>A) 412</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="b">
+                            <span>B) 402</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="c">
+                            <span>C) 312</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="d">
+                            <span>D) 422</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="c">
+                    <p><strong>3.</strong> What is 100 - 47?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q3" value="a">
+                            <span>A) 57</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="b">
+                            <span>B) 53</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="c">
+                            <span>C) 53</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="d">
+                            <span>D) 63</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="d">
+                    <p><strong>4.</strong> How many sides does a hexagon have?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q4" value="a">
+                            <span>A) 4</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="b">
+                            <span>B) 5</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="c">
+                            <span>C) 7</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="d">
+                            <span>D) 6</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="b">
+                    <p><strong>5.</strong> What fraction is shaded if 2 out of 4 parts are colored?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q5" value="a">
+                            <span>A) 1/4</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="b">
+                            <span>B) 2/4 or 1/2</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="c">
+                            <span>C) 3/4</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="d">
+                            <span>D) 4/4</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- READING COMPREHENSION SECTION -->
+            <div class="section" id="reading-section">
+                <h2><span class="icon">📚</span> Reading Comprehension</h2>
+                
+                <div class="question">
+                    <p><strong>Read the following story:</strong></p>
+                    <p style="background: white; padding: 15px; border-radius: 10px; margin: 10px 0; font-style: italic;">
+                        "Buddy was a golden retriever who loved to play fetch. Every morning, his owner Sarah would throw a red ball into the yard, and Buddy would chase it with his tail wagging happily. One rainy day, Sarah couldn't go outside, so she played hide-and-seek with Buddy inside the house. Buddy sniffed around and found Sarah hiding behind the couch. He barked excitedly, and they played until dinner time."
+                    </p>
+                    
+                    <p><strong>6.</strong> What type of dog was Buddy?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q6" value="a">
+                            <span>A) A poodle</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="b">
+                            <span>B) A golden retriever</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="c">
+                            <span>C) A bulldog</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="d">
+                            <span>D) A beagle</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="c">
+                    <p><strong>7.</strong> What game did Buddy and Sarah play on the rainy day?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q7" value="a">
+                            <span>A) Fetch</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="b">
+                            <span>B) Tag</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="c">
+                            <span>C) Hide-and-seek</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="d">
+                            <span>D) Soccer</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="a">
+                    <p><strong>8.</strong> Where did Buddy find Sarah hiding?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q8" value="a">
+                            <span>A) Behind the couch</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q8" value="b">
+                            <span>B) Under the bed</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q8" value="c">
+                            <span>C) In the closet</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q8" value="d">
+                            <span>D) In the kitchen</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p><strong>9.</strong> Draw or describe your favorite pet (real or imaginary). What does it look like? What does it like to do?</p>
+                    <textarea class="text-input" name="q9" placeholder="Draw a picture or write about your favorite pet..."></textarea>
+                </div>
+            </div>
+            
+            <!-- SPELLING & LANGUAGE SECTION -->
+            <div class="section" id="spelling-section">
+                <h2><span class="icon">✏️</span> Spelling & Language Skills</h2>
+                
+                <div class="question" data-correct="b">
+                    <p><strong>10.</strong> Which word is spelled correctly?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q10" value="a">
+                            <span>A) frend</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="b">
+                            <span>B) friend</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="c">
+                            <span>C) frend</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="d">
+                            <span>D) frient</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="a">
+                    <p><strong>11.</strong> Which sentence has a capital letter in the right place?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q11" value="a">
+                            <span>A) My name is Max.</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q11" value="b">
+                            <span>B) my name is max.</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q11" value="c">
+                            <span>C) My Name Is max.</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q11" value="d">
+                            <span>D) my Name is Max.</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="c">
+                    <p><strong>12.</strong> What is the plural of "cat"?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q12" value="a">
+                            <span>A) cat</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q12" value="b">
+                            <span>B) cates</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q12" value="c">
+                            <span>C) cats</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q12" value="d">
+                            <span>D) caties</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="d">
+                    <p><strong>13.</strong> Which word means the opposite of "hot"?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q13" value="a">
+                            <span>A) warm</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q13" value="b">
+                            <span>B) sunny</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q13" value="c">
+                            <span>C) fire</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q13" value="d">
+                            <span>D) cold</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="b">
+                    <p><strong>14.</strong> Which is a complete sentence?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q14" value="a">
+                            <span>A) Running fast.</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q14" value="b">
+                            <span>B) The dog runs fast.</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q14" value="c">
+                            <span>C) Fast and quick.</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q14" value="d">
+                            <span>D) Very fast.</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SCIENCE SECTION -->
+            <div class="section" id="science-section">
+                <h2><span class="icon">🔬</span> Science</h2>
+                
+                <div class="question" data-correct="c">
+                    <p><strong>15.</strong> What do plants need to grow?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q15" value="a">
+                            <span>A) Only water</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q15" value="b">
+                            <span>B) Only sunlight</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q15" value="c">
+                            <span>C) Sunlight, water, and soil</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q15" value="d">
+                            <span>D) Candy and toys</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="a">
+                    <p><strong>16.</strong> What are the four seasons?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q16" value="a">
+                            <span>A) Spring, summer, fall, winter</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q16" value="b">
+                            <span>B) Hot, cold, rainy, snowy</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q16" value="c">
+                            <span>C) Monday, Tuesday, Wednesday, Thursday</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q16" value="d">
+                            <span>D) Morning, afternoon, evening, night</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="b">
+                    <p><strong>17.</strong> Which animal is a mammal?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q17" value="a">
+                            <span>A) Fish</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q17" value="b">
+                            <span>B) Dog</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q17" value="c">
+                            <span>C) Bird</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q17" value="d">
+                            <span>D) Frog</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="d">
+                    <p><strong>18.</strong> Where does the Sun rise?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q18" value="a">
+                            <span>A) North</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q18" value="b">
+                            <span>B) South</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q18" value="c">
+                            <span>C) West</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q18" value="d">
+                            <span>D) East</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p><strong>19.</strong> Draw or describe the life cycle of a butterfly. What are the four stages?</p>
+                    <textarea class="text-input" name="q19" placeholder="Draw or write about the butterfly life cycle..."></textarea>
+                </div>
+            </div>
+            
+            <!-- CODING SECTION -->
+            <div class="section" id="coding-section">
+                <h2><span class="icon">💻</span> Coding Basics</h2>
+                
+                <div class="question" data-correct="c">
+                    <p><strong>20.</strong> In a game, if you want the character to jump when you press the space bar, what do you need?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q20" value="a">
+                            <span>A) A variable</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q20" value="b">
+                            <span>B) A loop</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q20" value="c">
+                            <span>C) An if statement (condition)</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q20" value="d">
+                            <span>D) A comment</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="a">
+                    <p><strong>21.</strong> What is a variable?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q21" value="a">
+                            <span>A) A box that holds information</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q21" value="b">
+                            <span>B) A type of game</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q21" value="c">
+                            <span>C) A computer mouse</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q21" value="d">
+                            <span>D) A keyboard key</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="d">
+                    <p><strong>22.</strong> If you want to count from 1 to 10, what would you use?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q22" value="a">
+                            <span>A) An if statement</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q22" value="b">
+                            <span>B) A variable</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q22" value="c">
+                            <span>C) A comment</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q22" value="d">
+                            <span>D) A loop (for loop)</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="b">
+                    <p><strong>23.</strong> In Scratch or block coding, what does a "repeat" block do?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q23" value="a">
+                            <span>A) Stops the game</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q23" value="b">
+                            <span>B) Does the same thing multiple times</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q23" value="c">
+                            <span>C) Makes the character invisible</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q23" value="d">
+                            <span>D) Plays a sound</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p><strong>24.</strong> If you were making a game where a character collects coins, what happens when the character touches a coin? Describe what the code should do.</p>
+                    <textarea class="text-input" name="q24" placeholder="Describe what should happen in the code..."></textarea>
+                </div>
+            </div>
+            
+            <!-- HISTORY / SOCIAL STUDIES SECTION -->
+            <div class="section" id="history-section">
+                <h2><span class="icon">📜</span> History & Social Studies</h2>
+                
+                <div class="question" data-correct="b">
+                    <p><strong>25.</strong> What country do we live in?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q25" value="a">
+                            <span>A) Canada</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q25" value="b">
+                            <span>B) United States of America</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q25" value="c">
+                            <span>C) Mexico</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q25" value="d">
+                            <span>D) England</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="c">
+                    <p><strong>26.</strong> Who is the leader of our country called?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q26" value="a">
+                            <span>A) King</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q26" value="b">
+                            <span>B) Mayor</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q26" value="c">
+                            <span>C) President</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q26" value="d">
+                            <span>D) Governor</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="a">
+                    <p><strong>27.</strong> What holiday do we celebrate in July with fireworks?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q27" value="a">
+                            <span>A) Independence Day (4th of July)</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q27" value="b">
+                            <span>B) Christmas</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q27" value="c">
+                            <span>C) Halloween</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q27" value="d">
+                            <span>D) Thanksgiving</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question" data-correct="d">
+                    <p><strong>28.</strong> Who was the first person to walk on the Moon?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q28" value="a">
+                            <span>A) Albert Einstein</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q28" value="b">
+                            <span>B) Thomas Edison</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q28" value="c">
+                            <span>C) George Washington</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q28" value="d">
+                            <span>D) Neil Armstrong</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p><strong>29.</strong> Draw or describe your family. Who are the important people in your life?</p>
+                    <textarea class="text-input" name="q29" placeholder="Draw or write about your family..."></textarea>
+                </div>
+            </div>
+            
+            <div class="submit-section">
+                <button type="button" class="submit-btn" onclick="submitAssessment()">📝 I'm Done!</button>
+            </div>
+        </form>
+        
+        <div class="results" id="results">
+            <h3>🎉 Amazing Work, Max!</h3>
+            <div class="score-card">
+                <div class="score-item">
+                    <h4>Mathematics</h4>
+                    <div class="score" id="math-score">0/5</div>
+                </div>
+                <div class="score-item">
+                    <h4>Reading</h4>
+                    <div class="score" id="reading-score">0/4</div>
+                </div>
+                <div class="score-item">
+                    <h4>Spelling/Language</h4>
+                    <div class="score" id="spelling-score">0/5</div>
+                </div>
+                <div class="score-item">
+                    <h4>Science</h4>
+                    <div class="score" id="science-score">0/5</div>
+                </div>
+                <div class="score-item">
+                    <h4>Coding</h4>
+                    <div class="score" id="coding-score">0/5</div>
+                </div>
+                <div class="score-item">
+                    <h4>History</h4>
+                    <div class="score" id="history-score">0/5</div>
+                </div>
+            </div>
+            <div class="feedback" id="feedback"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Timer
+        let seconds = 0;
+        let timerInterval;
+        
+        function startTimer() {
+            timerInterval = setInterval(function() {
+                seconds++;
+                const hrs = Math.floor(seconds / 3600);
+                const mins = Math.floor((seconds % 3600) / 60);
+                const secs = seconds % 60;
+                document.getElementById('timer').textContent = 
+                    `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+        
+        startTimer();
+        
+        // Progress bar
+        const questions = document.querySelectorAll('.question');
+        const totalQuestions = questions.length;
+        const radioInputs = document.querySelectorAll('input[type="radio"]');
+        
+        radioInputs.forEach(input => {
+            input.addEventListener('change', updateProgress);
+        });
+        
+        function updateProgress() {
+            const answered = document.querySelectorAll('input[type="radio"]:checked').length;
+            const progress = (answered / totalQuestions) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+        
+        // Option selection styling
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                if (radio) {
+                    const name = radio.name;
+                    document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                        r.closest('.option').classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                }
+            });
+        });
+        
+        // Submit assessment
+        function submitAssessment() {
+            clearInterval(timerInterval);
+            
+            let scores = {
+                math: 0,
+                reading: 0,
+                spelling: 0,
+                science: 0,
+                coding: 0,
+                history: 0
+            };
+            
+            // Calculate multiple choice scores
+            questions.forEach((q, index) => {
+                const correct = q.dataset.correct;
+                const selected = q.querySelector('input[type="radio"]:checked');
+                
+                if (correct && selected && selected.value === correct) {
+                    if (index < 5) scores.math++;
+                    else if (index < 9) scores.reading++;
+                    else if (index < 14) scores.spelling++;
+                    else if (index < 19) scores.science++;
+                    else if (index < 24) scores.coding++;
+                    else scores.history++;
+                }
+            });
+            
+            // Update score displays
+            document.getElementById('math-score').textContent = scores.math + '/5';
+            document.getElementById('reading-score').textContent = scores.reading + '/4';
+            document.getElementById('spelling-score').textContent = scores.spelling + '/5';
+            document.getElementById('science-score').textContent = scores.science + '/5';
+            document.getElementById('coding-score').textContent = scores.coding + '/5';
+            document.getElementById('history-score').textContent = scores.history + '/5';
+            
+            const totalScore = Object.values(scores).reduce((a, b) => a + b, 0);
+            const totalPossible = 29;
+            const percentage = Math.round((totalScore / totalPossible) * 100);
+            
+            // Generate feedback
+            let feedback = `<p><strong>Overall Score: ${totalScore}/${totalPossible} (${percentage}%)</strong></p>`;
+            feedback += `<p><strong>Time taken: ${document.getElementById('timer').textContent}</strong></p>`;
+            feedback += `<p>Great job, Max! Here's how you did:</p>`;
+            
+            if (scores.math >= 4) feedback += `<p>⭐ <strong>Math:</strong> You're a math star!</p>`;
+            else if (scores.math >= 3) feedback += `<p>👍 <strong>Math:</strong> Good work! Keep practicing!</p>`;
+            else feedback += `<p>📚 <strong>Math:</strong> Let's practice multiplication and adding big numbers.</p>`;
+            
+            if (scores.reading >= 3) feedback += `<p>⭐ <strong>Reading:</strong> You read really well!</p>`;
+            else feedback += `<p>📚 <strong>Reading:</strong> Let's read more stories together!</p>`;
+            
+            if (scores.spelling >= 4) feedback += `<p>⭐ <strong>Spelling:</strong> Fantastic spelling!</p>`;
+            else feedback += `<p>📚 <strong>Spelling:</strong> Let's practice tricky words!</p>`;
+            
+            if (scores.science >= 4) feedback += `<p>⭐ <strong>Science:</strong> You know so much about the world!</p>`;
+            else feedback += `<p>📚 <strong>Science:</strong> Let's explore plants, animals, and seasons!</p>`;
+            
+            if (scores.coding >= 4) feedback += `<p>⭐ <strong>Coding:</strong> You're a coding whiz!</p>`;
+            else feedback += `<p>📚 <strong>Coding:</strong> Let's play some coding games!</p>`;
+            
+            if (scores.history >= 4) feedback += `<p>⭐ <strong>History:</strong> You know your country well!</p>`;
+            else feedback += `<p>📚 <strong>History:</strong> Let's learn about our country and holidays!</p>`;
+            
+            document.getElementById('feedback').innerHTML = feedback;
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
