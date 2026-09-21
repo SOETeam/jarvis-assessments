@@ -246,6 +246,179 @@
                 padding: 15px;
             }
         }
+
+        /* ===== v2: detailed results (focus areas, review answers, print, copy) ===== */
+        .result-meta {
+            background: white;
+            border-radius: 15px;
+            padding: 14px 20px;
+            margin-bottom: 22px;
+            text-align: center;
+            color: #2d3748;
+            font-size: 1.02em;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+        }
+
+        .focus-section h4,
+        .review-section h4 {
+            color: #667eea;
+            font-size: 1.35em;
+            margin: 28px 0 10px;
+        }
+
+        .focus-intro {
+            color: #4a5568;
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+
+        .focus-item {
+            background: white;
+            border-radius: 15px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 5px solid #48bb78;
+        }
+
+        .focus-item.needs-focus {
+            border-left-color: #f6ad55;
+        }
+
+        .focus-line {
+            font-size: 1.08em;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .focus-tip {
+            margin-top: 7px;
+            color: #4a5568;
+            line-height: 1.55;
+        }
+
+        .review-toggle-row {
+            margin-bottom: 16px;
+        }
+
+        .review-item {
+            background: white;
+            border-radius: 15px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 5px solid #48bb78;
+        }
+
+        .review-item.incorrect,
+        .review-item.unanswered {
+            border-left-color: #f6ad55;
+        }
+
+        .review-item.open {
+            border-left-color: #90cdf4;
+        }
+
+        .review-q {
+            font-size: 1.05em;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 6px;
+            line-height: 1.55;
+        }
+
+        .review-tags {
+            font-size: 0.9em;
+            color: #718096;
+            margin-bottom: 8px;
+        }
+
+        .review-a {
+            color: #4a5568;
+            line-height: 1.55;
+        }
+
+        .review-written {
+            margin-top: 6px;
+            font-style: italic;
+            color: #2d3748;
+            line-height: 1.55;
+        }
+
+        .results-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1em;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+        }
+
+        .copy-fallback {
+            position: fixed;
+            left: 10px;
+            bottom: 10px;
+            width: min(680px, 92vw);
+            height: 220px;
+            z-index: 2000;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            body.results-shown .timer,
+            body.results-shown #assessmentForm,
+            body.results-shown .no-print {
+                display: none !important;
+            }
+
+            body.results-shown .container {
+                max-width: 100%;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            body.results-shown .results {
+                display: block !important;
+                background: white;
+            }
+
+            body.results-shown #reviewList {
+                display: block !important;
+            }
+
+            body.results-shown .result-meta,
+            body.results-shown .score-item,
+            body.results-shown .feedback,
+            body.results-shown .focus-item,
+            body.results-shown .review-item {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                break-inside: avoid;
+            }
+        }
     </style>
 </head>
 <body>
@@ -265,7 +438,7 @@
             <div class="section" id="math-section">
                 <h2><span class="icon">🔢</span> Mathematics</h2>
                 
-                <div class="question" data-correct="c">
+                <div class="question" data-skill="fractions" data-correct="c">
                     <p><strong>1.</strong> What is 3/4 + 2/3?</p>
                     <div class="options">
                         <label class="option">
@@ -287,12 +460,12 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="b">
+                <div class="question" data-skill="algebra-equations" data-correct="b">
                     <p><strong>2.</strong> Solve for x: 2x + 5 = 17</p>
                     <div class="options">
                         <label class="option">
                             <input type="radio" name="q2" value="a">
-                            <span>A) x = 6</span>
+                            <span>A) x = 4</span>
                         </label>
                         <label class="option">
                             <input type="radio" name="q2" value="b">
@@ -309,7 +482,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="d">
+                <div class="question" data-skill="percentages" data-correct="d">
                     <p><strong>3.</strong> What is 15% of 200?</p>
                     <div class="options">
                         <label class="option">
@@ -331,7 +504,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="a">
+                <div class="question" data-skill="area-perimeter" data-correct="a">
                     <p><strong>4.</strong> A rectangle has a length of 12 cm and a width of 8 cm. What is its area?</p>
                     <div class="options">
                         <label class="option">
@@ -353,7 +526,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="c">
+                <div class="question" data-skill="volume" data-correct="c">
                     <p><strong>5.</strong> What is the volume of a cube with side length 5 cm?</p>
                     <div class="options">
                         <label class="option">
@@ -380,7 +553,7 @@
             <div class="section" id="reading-section">
                 <h2><span class="icon">📚</span> Reading Comprehension</h2>
                 
-                <div class="question">
+                <div class="question" data-skill="main-idea" data-correct="b">
                     <p><strong>Read the following passage:</strong></p>
                     <p style="background: white; padding: 15px; border-radius: 10px; margin: 10px 0; font-style: italic;">
                         "The Amazon rainforest, often called the 'lungs of the Earth,' produces about 20% of the world's oxygen. This vast forest spans nine countries in South America and is home to more than 10% of all known species on Earth. Scientists have discovered over 400 billion individual trees representing approximately 16,000 different species. The rainforest also plays a crucial role in regulating the global climate by absorbing carbon dioxide and releasing oxygen through photosynthesis."
@@ -407,7 +580,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="b">
+                <div class="question" data-skill="comprehension-details" data-correct="b">
                     <p><strong>7.</strong> According to the passage, what percentage of the world's oxygen does the Amazon produce?</p>
                     <div class="options">
                         <label class="option">
@@ -429,7 +602,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="c">
+                <div class="question" data-skill="comprehension-details" data-correct="c">
                     <p><strong>8.</strong> How many different tree species are found in the Amazon?</p>
                     <div class="options">
                         <label class="option">
@@ -451,7 +624,7 @@
                     </div>
                 </div>
                 
-                <div class="question">
+                <div class="question" data-skill="writing-explanation">
                     <p><strong>9.</strong> In your own words, explain why the Amazon rainforest is called the "lungs of the Earth."</p>
                     <textarea class="text-input" name="q9" placeholder="Type your answer here..."></textarea>
                 </div>
@@ -461,7 +634,7 @@
             <div class="section" id="spelling-section">
                 <h2><span class="icon">✏️</span> Spelling & Language Skills</h2>
                 
-                <div class="question" data-correct="b">
+                <div class="question" data-skill="spelling-patterns" data-correct="b">
                     <p><strong>10.</strong> Which word is spelled correctly?</p>
                     <div class="options">
                         <label class="option">
@@ -483,7 +656,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="a">
+                <div class="question" data-skill="punctuation" data-correct="a">
                     <p><strong>11.</strong> Which sentence uses correct punctuation?</p>
                     <div class="options">
                         <label class="option">
@@ -505,7 +678,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="c">
+                <div class="question" data-skill="plurals" data-correct="c">
                     <p><strong>12.</strong> What is the plural of "child"?</p>
                     <div class="options">
                         <label class="option">
@@ -527,7 +700,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="d">
+                <div class="question" data-skill="sentence-structure" data-correct="d">
                     <p><strong>13.</strong> Which is a compound sentence?</p>
                     <div class="options">
                         <label class="option">
@@ -549,7 +722,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="b">
+                <div class="question" data-skill="verb-tenses" data-correct="b">
                     <p><strong>14.</strong> What is the past tense of "run"?</p>
                     <div class="options">
                         <label class="option">
@@ -562,7 +735,7 @@
                         </label>
                         <label class="option">
                             <input type="radio" name="q14" value="c">
-                            <span>C) runned</span>
+                            <span>C) run</span>
                         </label>
                         <label class="option">
                             <input type="radio" name="q14" value="d">
@@ -576,7 +749,7 @@
             <div class="section" id="science-section">
                 <h2><span class="icon">🔬</span> Science / Biology</h2>
                 
-                <div class="question" data-correct="a">
+                <div class="question" data-skill="photosynthesis" data-correct="a">
                     <p><strong>15.</strong> What is the process by which plants make their own food?</p>
                     <div class="options">
                         <label class="option">
@@ -598,7 +771,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="c">
+                <div class="question" data-skill="states-of-matter" data-correct="c">
                     <p><strong>16.</strong> What are the three states of matter?</p>
                     <div class="options">
                         <label class="option">
@@ -620,7 +793,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="b">
+                <div class="question" data-skill="human-body" data-correct="b">
                     <p><strong>17.</strong> Which organ pumps blood throughout the body?</p>
                     <div class="options">
                         <label class="option">
@@ -642,7 +815,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="d">
+                <div class="question" data-skill="cells" data-correct="d">
                     <p><strong>18.</strong> What is the powerhouse of the cell?</p>
                     <div class="options">
                         <label class="option">
@@ -664,7 +837,7 @@
                     </div>
                 </div>
                 
-                <div class="question">
+                <div class="question" data-skill="cells">
                     <p><strong>19.</strong> Explain the difference between a plant cell and an animal cell. Give at least two differences.</p>
                     <textarea class="text-input" name="q19" placeholder="Type your answer here..."></textarea>
                 </div>
@@ -674,7 +847,7 @@
             <div class="section" id="coding-section">
                 <h2><span class="icon">💻</span> Coding Basics</h2>
                 
-                <div class="question" data-correct="a">
+                <div class="question" data-skill="html-basics" data-correct="a">
                     <p><strong>20.</strong> What does HTML stand for?</p>
                     <div class="options">
                         <label class="option">
@@ -696,7 +869,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="c">
+                <div class="question" data-skill="python-syntax" data-correct="c">
                     <p><strong>21.</strong> Which symbol is used for comments in Python?</p>
                     <div class="options">
                         <label class="option">
@@ -718,7 +891,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="b">
+                <div class="question" data-skill="variables" data-correct="b">
                     <p><strong>22.</strong> What is a variable in programming?</p>
                     <div class="options">
                         <label class="option">
@@ -740,7 +913,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="d">
+                <div class="question" data-skill="loops" data-correct="d">
                     <p><strong>23.</strong> Which of these is a loop structure?</p>
                     <div class="options">
                         <label class="option">
@@ -762,7 +935,7 @@
                     </div>
                 </div>
                 
-                <div class="question">
+                <div class="question" data-skill="python-programming">
                     <p><strong>24.</strong> Write a simple Python program that prints "Hello, World!" and explain what each part does.</p>
                     <textarea class="text-input" name="q24" placeholder="Type your code and explanation here..."></textarea>
                 </div>
@@ -772,7 +945,7 @@
             <div class="section" id="history-section">
                 <h2><span class="icon">📜</span> History</h2>
                 
-                <div class="question" data-correct="b">
+                <div class="question" data-skill="explorers" data-correct="b">
                     <p><strong>25.</strong> In what year did Christopher Columbus first reach the Americas?</p>
                     <div class="options">
                         <label class="option">
@@ -794,7 +967,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="c">
+                <div class="question" data-skill="ancient-egypt" data-correct="c">
                     <p><strong>26.</strong> Which ancient civilization built the pyramids at Giza?</p>
                     <div class="options">
                         <label class="option">
@@ -816,7 +989,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="a">
+                <div class="question" data-skill="magna-carta" data-correct="a">
                     <p><strong>27.</strong> What was the significance of the Magna Carta?</p>
                     <div class="options">
                         <label class="option">
@@ -838,7 +1011,7 @@
                     </div>
                 </div>
                 
-                <div class="question" data-correct="d">
+                <div class="question" data-skill="us-presidents" data-correct="d">
                     <p><strong>28.</strong> Who was the first President of the United States?</p>
                     <div class="options">
                         <label class="option">
@@ -860,7 +1033,7 @@
                     </div>
                 </div>
                 
-                <div class="question">
+                <div class="question" data-skill="printing-press">
                     <p><strong>29.</strong> Explain why the invention of the printing press was important for history. How did it change society?</p>
                     <textarea class="text-input" name="q29" placeholder="Type your answer here..."></textarea>
                 </div>
@@ -900,6 +1073,27 @@
                 </div>
             </div>
             <div class="feedback" id="feedback"></div>
+            <div class="result-meta" id="resultMeta" style="display:none"></div>
+
+            <div class="focus-section">
+                <h4>🎯 Focus Areas</h4>
+                <p class="focus-intro">The skills to practice first are at the top of the list. Skills with a 🌟 are already strong — nice work!</p>
+                <div id="focusAreas"></div>
+            </div>
+
+            <div class="review-section">
+                <h4>🔍 Review Your Answers</h4>
+                <p class="focus-intro">Go through these together with a grown-up. Nothing on this page is sent anywhere — it all stays right here.</p>
+                <div class="review-toggle-row no-print">
+                    <button type="button" class="action-btn" id="toggleReviewBtn" onclick="toggleReview()">👁️ Show All Answers</button>
+                </div>
+                <div id="reviewList" style="display:none"></div>
+            </div>
+
+            <div class="results-actions no-print">
+                <button type="button" class="action-btn" onclick="printResults()">🖨️ Print Results</button>
+                <button type="button" class="action-btn" id="copyBtn" onclick="copyResultsJson()">📋 Copy Results (JSON)</button>
+            </div>
         </div>
     </div>
     
@@ -1016,7 +1210,366 @@
             
             document.getElementById('feedback').innerHTML = feedback;
             document.getElementById('results').style.display = 'block';
+            document.body.classList.add('results-shown');
+            renderDetailedResults(scores, totalScore, totalPossible, percentage);
             document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ===== v2: detailed per-question results =====
+        // Everything below lives in memory only: no network, no storage, no egress.
+        let currentResult = null;
+
+        const SUBJECT_LABELS = {
+            math: 'Math',
+            reading: 'Reading',
+            spelling: 'Spelling/Language',
+            science: 'Science',
+            coding: 'Coding',
+            history: 'History'
+        };
+
+        const SUBJECT_POSSIBLES = { math: 5, reading: 4, spelling: 5, science: 5, coding: 5, history: 5 };
+
+        const SKILL_META = {
+            multiplication: { label: 'Multiplication', tip: "Let's play a times-table game together — the 7s and 8s are great next steps!" },
+            'multi-digit-addition': { label: 'Adding Big Numbers', tip: "Let's stack the numbers and add one column at a time, starting from the right!" },
+            subtraction: { label: 'Subtraction', tip: "Let's practice subtracting with borrowing — try 100 − 47 together!" },
+            'geometry-shapes': { label: 'Shapes', tip: "Let's count the sides on shapes around the house — hexagons have six!" },
+            fractions: { label: 'Fractions', tip: "Let's draw fractions as pizza slices so we can see how the parts fit!" },
+            'algebra-equations': { label: 'Solving for X', tip: "Let's treat equations like a balance scale — do the same thing to both sides!" },
+            percentages: { label: 'Percentages', tip: "Let's find 10% of a number first, then build up from there!" },
+            'area-perimeter': { label: 'Area & Perimeter', tip: "Let's measure a book or a room and multiply length times width!" },
+            volume: { label: 'Volume', tip: "Let's stack blocks to see why side × side × side gives the volume!" },
+            comprehension: { label: 'Story Comprehension', tip: "Let's read a story together and talk about what happened in it!" },
+            'main-idea': { label: 'Main Idea', tip: "Let's practice asking: what is this whole passage mostly about?" },
+            'comprehension-details': { label: 'Finding Details', tip: "Let's hunt through the passage like detectives to find the exact answer!" },
+            writing: { label: 'Writing Ideas', tip: "Let's pick a fun topic and write a few sentences about it together!" },
+            'writing-explanation': { label: 'Explaining in Your Own Words', tip: "Let's say the answer out loud first, then write it down!" },
+            'spelling-patterns': { label: 'Tricky Spellings', tip: "Let's make flashcards for tricky words like friend and definitely!" },
+            capitalization: { label: 'Capital Letters', tip: "Let's practice capitals for names, sentence starts, and the word I!" },
+            punctuation: { label: 'Punctuation', tip: "Let's practice quotation marks when characters talk in a story!" },
+            plurals: { label: 'Plurals', tip: "Let's sort words into -s, -es, and surprise plurals like children!" },
+            vocabulary: { label: 'Vocabulary', tip: "Let's play an opposites game — hot and cold, big and small, up and down!" },
+            'sentence-structure': { label: 'Building Sentences', tip: "Let's build sentences with a who and a what, joined with and or but!" },
+            'verb-tenses': { label: 'Verb Tenses', tip: "Let's practice today-and-yesterday verbs: run becomes ran, jump becomes jumped!" },
+            plants: { label: 'Plants', tip: "Let's plant a seed and watch what it needs: sunlight, water, and soil!" },
+            seasons: { label: 'Seasons', tip: "Let's name the four seasons and draw one thing we love to do in each!" },
+            animals: { label: 'Animals', tip: "Let's sort animals into mammals, birds, fish, and reptiles!" },
+            'earth-sun': { label: 'Sun & Sky', tip: "Let's watch the sun rise and set for a few mornings and evenings!" },
+            'life-cycles': { label: 'Life Cycles', tip: "Let's draw the butterfly cycle: egg, caterpillar, chrysalis, butterfly!" },
+            photosynthesis: { label: 'Photosynthesis', tip: "Let's watch how plants turn sunlight, water, and air into food!" },
+            'states-of-matter': { label: 'States of Matter', tip: "Let's hunt for solids, liquids, and gases around the kitchen!" },
+            'human-body': { label: 'Human Body', tip: "Let's feel our heartbeat after jumping jacks and learn what the heart does!" },
+            cells: { label: 'Cells', tip: "Let's look at cell diagrams and spot what makes plant and animal cells different!" },
+            conditionals: { label: 'If Statements', tip: "Let's build a game rule together: IF the space key is pressed, THEN jump!" },
+            variables: { label: 'Variables', tip: "Let's make a scoreboard variable in a game and watch the number change!" },
+            loops: { label: 'Loops', tip: "Let's use a repeat block to make something happen ten times in a row!" },
+            'game-design': { label: 'Game Logic', tip: "Let's design one game rule together: what should happen, and what should the code check?" },
+            'html-basics': { label: 'HTML', tip: "Let's write a tiny web page together with a title and a heading!" },
+            'python-syntax': { label: 'Python Basics', tip: "Let's print messages in Python and see what the # symbol does!" },
+            'python-programming': { label: 'Writing Code', tip: "Let's write a tiny program together and read it out loud line by line!" },
+            civics: { label: 'Our Country', tip: "Let's look at a map and talk about our country and who leads it!" },
+            holidays: { label: 'Holidays', tip: "Let's make a year-long calendar of the holidays we celebrate!" },
+            'space-history': { label: 'Space History', tip: "Let's watch the Moon landing together and cheer for Neil Armstrong!" },
+            explorers: { label: 'Explorers', tip: "Let's trace the 1492 voyage across the ocean on a map!" },
+            'ancient-egypt': { label: 'Ancient Egypt', tip: "Let's build a paper pyramid and learn about the pharaohs!" },
+            'magna-carta': { label: 'Magna Carta', tip: "Let's talk about the rules that even a king had to follow!" },
+            'us-presidents': { label: 'US Presidents', tip: "Let's learn the first presidents in order with a silly song!" },
+            'printing-press': { label: 'Printing Press', tip: "Let's imagine a world where every book had to be copied by hand!" },
+            family: { label: 'My Family', tip: "Let's make a little poster of the people we love!" }
+        };
+
+        function skillLabel(tag) {
+            return (SKILL_META[tag] && SKILL_META[tag].label) || tag;
+        }
+
+        function skillTip(tag) {
+            return (SKILL_META[tag] && SKILL_META[tag].tip) || "Let's practice this skill together!";
+        }
+
+        function questionSubject(qEl) {
+            const section = qEl.closest('.section');
+            if (section && section.id) return section.id.replace(/-section$/, '');
+            return 'general';
+        }
+
+        function questionInfo(qEl) {
+            const ps = qEl.querySelectorAll('p');
+            for (let i = 0; i < ps.length; i++) {
+                const strong = ps[i].querySelector('strong');
+                if (strong) {
+                    const m = strong.textContent.match(/^(\d+)\./);
+                    if (m) {
+                        return {
+                            number: parseInt(m[1], 10),
+                            text: ps[i].textContent.replace(/^\s*\d+\.\s*/, '').trim()
+                        };
+                    }
+                }
+            }
+            return { number: 0, text: '' };
+        }
+
+        function optionText(qEl, value) {
+            const input = qEl.querySelector('input[type="radio"][value="' + value + '"]');
+            if (!input) return value;
+            const opt = input.closest('.option');
+            const span = opt ? opt.querySelector('span') : null;
+            return span ? span.textContent.trim() : value;
+        }
+
+        function buildRows() {
+            const rows = [];
+            document.querySelectorAll('.question').forEach(function(qEl) {
+                const info = questionInfo(qEl);
+                const subject = questionSubject(qEl);
+                const skill = qEl.dataset.skill || 'unsorted';
+                const hasChoices = !!qEl.querySelector('.options');
+                const correctKey = qEl.dataset.correct || null;
+                const selected = qEl.querySelector('input[type="radio"]:checked');
+                let outcome;
+                let chosen;
+                let correctAnswer;
+                if (!hasChoices || !correctKey) {
+                    outcome = 'open';
+                    const ta = qEl.querySelector('textarea.text-input');
+                    chosen = (ta && ta.value.trim()) ? ta.value.trim() : null;
+                    correctAnswer = null;
+                } else {
+                    correctAnswer = optionText(qEl, correctKey);
+                    chosen = selected ? optionText(qEl, selected.value) : null;
+                    outcome = !selected ? 'unanswered' : (selected.value === correctKey ? 'correct' : 'incorrect');
+                }
+                rows.push({
+                    id: 'q' + info.number,
+                    number: info.number,
+                    subject: subject,
+                    subjectLabel: SUBJECT_LABELS[subject] || subject,
+                    skill: skill,
+                    skillLabel: skillLabel(skill),
+                    question: info.text,
+                    chosen: chosen,
+                    correctAnswer: correctAnswer,
+                    outcome: outcome
+                });
+            });
+            return rows;
+        }
+
+        function buildFocusAreas(rows) {
+            const bySkill = {};
+            rows.forEach(function(r) {
+                if (r.outcome === 'open') return;
+                if (!bySkill[r.skill]) {
+                    bySkill[r.skill] = { skill: r.skill, label: skillLabel(r.skill), attempted: 0, missed: 0 };
+                }
+                bySkill[r.skill].attempted++;
+                if (r.outcome !== 'correct') bySkill[r.skill].missed++;
+            });
+            const areas = [];
+            Object.keys(bySkill).forEach(function(k) {
+                areas.push(bySkill[k]);
+            });
+            areas.forEach(function(a) {
+                a.percentMissed = Math.round((a.missed / a.attempted) * 100);
+            });
+            areas.sort(function(a, b) {
+                return (b.missed / b.attempted) - (a.missed / a.attempted) || b.attempted - a.attempted || a.label.localeCompare(b.label);
+            });
+            return areas;
+        }
+
+        function studentName() {
+            const p = document.querySelector('header p');
+            if (p) {
+                const m = p.textContent.match(/Student \(([^)]+)\)/);
+                if (m) return m[1].trim();
+            }
+            return 'Student';
+        }
+
+        function assessmentTitle() {
+            const h = document.querySelector('header h1');
+            return h ? h.textContent.replace(/^[^A-Za-z0-9]+/, '').trim() : 'Assessment';
+        }
+
+        function gradeNumber() {
+            const h = document.querySelector('header h1');
+            const m = h ? h.textContent.match(/(\d+)\s*(?:st|nd|rd|th)\s+Grade/i) : null;
+            return m ? parseInt(m[1], 10) : null;
+        }
+
+        function buildResultObject(rows, areas, scores, totalScore, totalPossible, percentage) {
+            const subjects = {};
+            Object.keys(SUBJECT_POSSIBLES).forEach(function(s) {
+                subjects[s] = { label: SUBJECT_LABELS[s], correct: scores[s] || 0, possible: SUBJECT_POSSIBLES[s] };
+            });
+            return {
+                version: 2,
+                assessment: assessmentTitle(),
+                student: studentName(),
+                grade: gradeNumber(),
+                date: new Date().toLocaleString(),
+                timeTaken: document.getElementById('timer').textContent,
+                score: {
+                    correct: totalScore,
+                    possible: totalPossible,
+                    percent: percentage,
+                    subjects: subjects
+                },
+                focusAreas: areas.map(function(a) {
+                    return {
+                        skill: a.skill,
+                        label: a.label,
+                        missed: a.missed,
+                        attempted: a.attempted,
+                        percentMissed: a.percentMissed,
+                        suggestion: skillTip(a.skill)
+                    };
+                }),
+                questions: rows
+            };
+        }
+
+        function renderMeta(result) {
+            const meta = document.getElementById('resultMeta');
+            if (!meta) return;
+            meta.textContent = '👤 ' + result.student + '  ·  📅 ' + result.date + '  ·  ⏱ Time: ' + result.timeTaken;
+            meta.style.display = 'block';
+        }
+
+        function renderFocusAreas(areas) {
+            const wrap = document.getElementById('focusAreas');
+            if (!wrap) return;
+            wrap.innerHTML = '';
+            if (!areas.length) {
+                const empty = document.createElement('p');
+                empty.className = 'focus-intro';
+                empty.textContent = 'No scored questions found.';
+                wrap.appendChild(empty);
+                return;
+            }
+            areas.forEach(function(a, i) {
+                const item = document.createElement('div');
+                item.className = 'focus-item ' + (a.missed > 0 ? 'needs-focus' : 'all-good');
+                const line = document.createElement('div');
+                line.className = 'focus-line';
+                if (a.missed > 0) {
+                    line.textContent = '🔧 ' + (i + 1) + '. ' + a.label + ' — missed ' + a.missed + ' of ' + a.attempted;
+                } else {
+                    line.textContent = '🌟 ' + (i + 1) + '. ' + a.label + ' — ' + a.attempted + ' of ' + a.attempted + " correct! You've got this one down!";
+                }
+                item.appendChild(line);
+                if (a.missed > 0) {
+                    const tip = document.createElement('div');
+                    tip.className = 'focus-tip';
+                    tip.textContent = '💡 ' + skillTip(a.skill);
+                    item.appendChild(tip);
+                }
+                wrap.appendChild(item);
+            });
+        }
+
+        function renderReview(rows) {
+            const list = document.getElementById('reviewList');
+            if (!list) return;
+            list.innerHTML = '';
+            rows.forEach(function(r) {
+                const item = document.createElement('div');
+                item.className = 'review-item ' + r.outcome;
+                const q = document.createElement('div');
+                q.className = 'review-q';
+                q.textContent = r.number + '. ' + r.question;
+                item.appendChild(q);
+                const tags = document.createElement('div');
+                tags.className = 'review-tags';
+                tags.textContent = '📘 ' + r.subjectLabel + ' · 🎯 ' + r.skillLabel;
+                item.appendChild(tags);
+                const a = document.createElement('div');
+                a.className = 'review-a';
+                if (r.outcome === 'open') {
+                    a.textContent = "✍️ Written answer — one to look at together with a grown-up.";
+                    item.appendChild(a);
+                    if (r.chosen) {
+                        const w = document.createElement('div');
+                        w.className = 'review-written';
+                        w.textContent = '“' + r.chosen + '”';
+                        item.appendChild(w);
+                    }
+                } else if (r.outcome === 'correct') {
+                    a.textContent = "✅ You chose: " + r.chosen + " — that's right!";
+                    item.appendChild(a);
+                } else if (r.outcome === 'unanswered') {
+                    a.textContent = "🤔 No answer was picked. The right answer is: " + r.correctAnswer + " — let's look at this one together!";
+                    item.appendChild(a);
+                } else {
+                    a.textContent = "💛 You chose: " + r.chosen + " · The right answer is: " + r.correctAnswer + " — let's look at this one together!";
+                    item.appendChild(a);
+                }
+                list.appendChild(item);
+            });
+        }
+
+        function toggleReview() {
+            const list = document.getElementById('reviewList');
+            const btn = document.getElementById('toggleReviewBtn');
+            if (!list || !btn) return;
+            const showing = list.style.display !== 'none';
+            list.style.display = showing ? 'none' : 'block';
+            btn.textContent = showing ? '👁️ Show All Answers' : '🙈 Hide All Answers';
+        }
+
+        function printResults() {
+            window.print();
+        }
+
+        async function copyResultsJson() {
+            if (!currentResult) return;
+            const text = JSON.stringify(currentResult, null, 2);
+            const btn = document.getElementById('copyBtn');
+            let copied = false;
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    copied = true;
+                }
+            } catch (err) {
+                copied = false;
+            }
+            if (!copied) {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.setAttribute('readonly', '');
+                ta.className = 'copy-fallback no-print';
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                    copied = document.execCommand('copy');
+                } catch (err) {
+                    copied = false;
+                }
+                if (copied) {
+                    document.body.removeChild(ta);
+                } else if (btn) {
+                    btn.textContent = '⚠️ JSON is selected below — press Ctrl+C to copy';
+                    return;
+                }
+            }
+            if (btn) {
+                btn.textContent = '✅ Copied to clipboard!';
+                setTimeout(function() {
+                    btn.textContent = '📋 Copy Results (JSON)';
+                }, 2500);
+            }
+        }
+
+        function renderDetailedResults(scores, totalScore, totalPossible, percentage) {
+            const rows = buildRows();
+            const areas = buildFocusAreas(rows);
+            currentResult = buildResultObject(rows, areas, scores, totalScore, totalPossible, percentage);
+            renderMeta(currentResult);
+            renderFocusAreas(areas);
+            renderReview(rows);
         }
     </script>
 </body>
