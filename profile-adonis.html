@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Adonis — SPROUT Portal</title>
+<style>
+:root{--bg:#0b132b;--card:#1c2541;--ac:#00e5a0;--gold:#ffd166;--txt:#eef2ff;--mut:#94a3b8}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--txt);font-family:system-ui,'Segoe UI',sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:24px 16px 48px}
+header{display:flex;align-items:center;gap:12px}h1{font-size:1.6rem}
+.back{color:var(--mut);font-size:.85rem;text-decoration:none;display:inline-block;margin:8px 0 16px}
+.card{background:var(--card);border-radius:14px;padding:18px;margin-bottom:16px;border-left:4px solid var(--ac)}
+.card h2{font-size:1.05rem;margin-bottom:8px}
+.day{margin-bottom:14px}
+.day h3{font-size:.9rem;color:var(--gold);margin-bottom:6px}
+label.asg{display:flex;gap:10px;align-items:flex-start;background:#0f172a;border-radius:10px;padding:10px;margin-bottom:8px;cursor:pointer}
+label.asg input{margin-top:4px;accent-color:#00e5a0;width:18px;height:18px;flex-shrink:0}
+label.asg .t{flex:1}
+label.asg .m{display:block;color:var(--mut);font-size:.78rem;margin-top:3px}
+label.asg.done .t{text-decoration:line-through;opacity:.55}
+label.asg.done .m{opacity:.4}
+.badge{display:inline-block;background:var(--ac);color:#001b12;font-weight:800;border-radius:20px;padding:3px 12px;font-size:.8rem;margin-left:6px}
+.pbar{height:12px;background:#0f172a;border-radius:8px;overflow:hidden;margin:10px 0}
+.pbar i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),#8a2be2);transition:width .3s}
+.hint{color:var(--mut);font-size:.8rem}
+footer{color:#64748b;font-size:.75rem;margin-top:20px;text-align:center}
+button.pr{background:none;border:1px solid var(--mut);color:var(--mut);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:.8rem}
+</style></head><body><div class="wrap">
+<header><span style="font-size:2rem">🦊</span><h1>Adonis's School Portal</h1><span class="badge" id="badge">WEEK 1</span></header>
+<a class="back" href="dashboard.html">← back to dashboard</a>
+<div class="card">
+<h2>📋 This week: Math + ELA <span class="hint">· mastery gate 0.80 · 5th band</span></h2>
+<div class="pbar"><i id="pbar" style="width:0%"></i></div>
+<p class="hint" id="count">0 of 10 done</p>
+</div>
+<div class="card">
+<h2>🗓️ Week 1 — check things off as you finish</h2>
+<div class="day"><h3>Mon 9/22 · Math <span style="color:var(--mut);font-weight:400">· 15 min</span></h3><label class="asg"><input type="checkbox"><span class="t">Place-value warm-up: build 5 numbers with digit cards, write in expanded form<span class="m">✅ 8-item check · gate 0.80</span></span></label></div><div class="day"><h3>Mon 9/22 · ELA <span style="color:var(--mut);font-weight:400">· 20 min</span></h3><label class="asg"><input type="checkbox"><span class="t">Reading log: 20 min + pick 3 new vocabulary words, define in your own words<span class="m">✅ log entry complete</span></span></label></div><div class="day"><h3>Tue 9/23 · Math <span style="color:var(--mut);font-weight:400">· 20 min</span></h3><label class="asg"><input type="checkbox"><span class="t">Multi-digit add/subtract: 10 problems, show your carrying work<span class="m">✅ 10-item check · gate 0.80</span></span></label></div><div class="day"><h3>Tue 9/23 · ELA <span style="color:var(--mut);font-weight:400">· 20 min</span></h3><label class="asg"><input type="checkbox"><span class="t">Main-idea detective: read 1 short article, write the main idea in 1 sentence<span class="m">✅ 1 clean sentence</span></span></label></div><div class="day"><h3>Wed 9/24 · Math <span style="color:var(--mut);font-weight:400">· 20 min</span></h3><label class="asg"><input type="checkbox"><span class="t">Multiplication patterns: times-table maze (×6, ×7, ×8) + 6 word problems<span class="m">✅ 8-item check · gate 0.80</span></span></label></div><div class="day"><h3>Wed 9/24 · ELA <span style="color:var(--mut);font-weight:400">· 20 min</span></h3><label class="asg"><input type="checkbox"><span class="t">Sentence lab: fix 6 scrambled sentences, write 2 of your own with a comma rule<span class="m">✅ 6 fixed + 2 written</span></span></label></div><div class="day"><h3>Thu 9/25 · Math <span style="color:var(--mut);font-weight:400">· 20 min</span></h3><label class="asg"><input type="checkbox"><span class="t">Division as sharing: 8 sharing stories with pictures for 3 of them<span class="m">✅ 8-item check · gate 0.80</span></span></label></div><div class="day"><h3>Thu 9/25 · ELA <span style="color:var(--mut);font-weight:400">· 25 min</span></h3><label class="asg"><input type="checkbox"><span class="t">Paragraph builder: 1 paragraph (topic sentence + 3 details + closer)<span class="m">✅ 1 complete paragraph</span></span></label></div><div class="day"><h3>Fri 9/26 · Math <span style="color:var(--mut);font-weight:400">· 30 min</span></h3><label class="asg"><input type="checkbox"><span class="t">WEEKLY MASTERY CHECK: 12 mixed problems from this week<span class="m">✅ 12-item check · GATE 0.80 → pass = week 2 unlock</span></span></label></div><div class="day"><h3>Fri 9/26 · ELA <span style="color:var(--mut);font-weight:400">· 20 min</span></h3><label class="asg"><input type="checkbox"><span class="t">Free-write Friday: 1 page on any topic + read it aloud to Mom<span class="m">✅ 1 page + read-aloud</span></span></label></div>
+</div>
+<div class="card">
+<h2>🌱 How SPROUT works</h2>
+<p class="hint">Do today's assignments → Friday's mastery check decides if week 2 unlocks. Miss the gate? SPROUT re-plans just the shaky skills — no shame, just the next rep. Placement tests make future weeks fit YOU.</p>
+<p style="margin-top:10px"><a href="assessment-5.html" style="color:var(--ac)">Take my placement assessment →</a></p>
+</div>
+<footer>🌱 SPROUT v0 prototype · progress saved on this device (localStorage) · no photos, no birthdates, first names only · noindex</footer>
+</div>
+<script>
+var KEY="sprout_adonis_max";var MAX=10;
+var boxes=document.querySelectorAll("label.asg input");
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return{}}}
+function save(d){localStorage.setItem(KEY,JSON.stringify(d))}
+function render(){var d=load();var n=0;
+boxes.forEach(function(b,i){var on=!!d[i];b.checked=on;b.parentNode.classList.toggle("done",on);if(on)n++});
+document.getElementById("pbar").style.width=(n/MAX*100)+"%";
+document.getElementById("count").textContent=n+" of "+MAX+" done";
+document.getElementById("badge").textContent=(n>=MAX)?"🎉 WEEK COMPLETE":"WEEK 1"}
+boxes.forEach(function(b,i){b.addEventListener("change",function(){var d=load();d[i]=b.checked;save(d);render()})});
+document.querySelector("button.pr").addEventListener("click",function(){window.print()});
+render();
+</script></body></html>
